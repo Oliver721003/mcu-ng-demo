@@ -1,3 +1,4 @@
+import { BookService } from './../services/book.service';
 import { Component } from '@angular/core';
 import { Book } from '../model/book';
 
@@ -7,26 +8,21 @@ import { Book } from '../model/book';
   styleUrls: ['./books-page.component.css']
 })
 export class BooksPageComponent {
-  // books: Book[] = [];
-  books = [
-    new Book('Book X', '張三', '銘傳'),
-    new Book('Book Y', '李四', '銘傳'),
-    new Book('Book Z', '張三', '銘傳'),
-  ];
+  constructor(protected bookService: BookService) {}
 
   onSearch(): void {
-    console.log('click search button');
+    this.bookService.search();
   }
 
   onAdd(): void {
-    this.books.push(new Book('Book New', '王五', '銘傳'))
+    this.bookService.add(new Book('Book New', '王五', '銘傳'))
   }
 
   onEdit(index: number): void {
-    console.log(`click edit button. index = ${index}`);
+    this.bookService.update(index);
   }
 
   onDelete(index: number): void {
-    this.books.splice(index, 1);
+    this.bookService.delete(index);
   }
 }
