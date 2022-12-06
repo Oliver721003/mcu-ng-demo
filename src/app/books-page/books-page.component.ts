@@ -19,7 +19,7 @@ export class BooksPageComponent {
   }
 
   onAdd(): void {
-    console.log('click add button');
+    this.books.push(new Book('Book New', '王五', '銘傳'))
   }
 
   onEdit(index: number): void {
@@ -27,6 +27,6 @@ export class BooksPageComponent {
   }
 
   onDelete(index: number): void {
-    console.log(`click delete button. index = ${index}`);
+    this.books.splice(index, 1);
   }
 }
