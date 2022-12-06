@@ -1,6 +1,7 @@
 import { BookService } from './../services/book.service';
 import { Component } from '@angular/core';
 import { Book } from '../model/book';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-books-page',
@@ -8,14 +9,14 @@ import { Book } from '../model/book';
   styleUrls: ['./books-page.component.css']
 })
 export class BooksPageComponent {
-  constructor(protected bookService: BookService) {}
+  constructor(private router: Router, protected bookService: BookService) {}
 
   onSearch(): void {
     this.bookService.search();
   }
 
   onAdd(): void {
-    this.bookService.add(new Book('Book New', '王五', '銘傳'))
+    this.router.navigate(['book', 'form']);
   }
 
   onEdit(index: number): void {
