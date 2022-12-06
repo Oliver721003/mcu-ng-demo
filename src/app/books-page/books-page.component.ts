@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Book } from '../model/book';
 
 @Component({
   selector: 'app-books-page',
@@ -6,8 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./books-page.component.css']
 })
 export class BooksPageComponent {
-  bookName: string = 'Book A';
-  author = '張三';
+  // books: Book[] = [];
+  books = [
+    new Book('Book X', '張三', '銘傳'),
+    new Book('Book Y', '李四', '銘傳'),
+    new Book('Book Z', '張三', '銘傳'),
+  ];
 
   onSearch(): void {
     console.log('click search button');
