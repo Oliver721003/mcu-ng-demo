@@ -1,5 +1,5 @@
 import { BookService } from './../services/book.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Book } from '../model/book';
 import { Router } from '@angular/router';
 
@@ -8,8 +8,18 @@ import { Router } from '@angular/router';
   templateUrl: './books-page.component.html',
   styleUrls: ['./books-page.component.css']
 })
-export class BooksPageComponent {
+export class BooksPageComponent implements OnInit {
+  books: Book[] = [];
+
   constructor(private router: Router, protected bookService: BookService) {}
+
+  ngOnInit(): void {
+      this.bookService.search()
+        .subscribe((books: Book[]) => {
+          console.table(books);
+          this.books = books;
+        })
+  }
 
   onSearch(): void {
     this.bookService.search();

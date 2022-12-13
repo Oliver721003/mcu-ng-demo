@@ -1,16 +1,20 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Book } from '../model/book';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
+  private _url = 'http://localhost:3000/books';
+
   data: Book[] = [];
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
-  search(): void {
-    console.log('click search button');
+  search(): Observable<Book[]> {
+    return this.httpClient.get<Book[]>(this._url);
   }
 
   add(book: Book): void {
