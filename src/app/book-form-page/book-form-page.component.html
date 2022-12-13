@@ -1,8 +1,13 @@
 <!-- h2+form>input[type=text][placeholder]*3 -->
 <h2>書籍資料</h2>
 <form>
-  <input type="text" placeholder="名稱">
-  <input type="text" placeholder="作者">
-  <input type="text" placeholder="出版社">
+  <input name="name" type="text" placeholder="名稱"
+  [(ngModel)]="bookName">
+  <input name="author" type="text" placeholder="作者"
+  [(ngModel)]="author">
+  <input name="company" type="text" placeholder="出版社"
+  [(ngModel)]="company">
+  <button type="button" (click)="onAdd()">新增</button>
   <button type="button" (click)="onCancel()">取消</button>
 </form>
+<pre>{{ bookName }}</pre>
