@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable, switchMap, tap } from 'rxjs';
 import { Book } from '../model/book';
 
 @Injectable({
@@ -18,7 +18,21 @@ export class BookService {
   }
 
   add(book: Book): Observable<Book> {
-    return this.httpClient.post<Book>(this._url, book);
+    return this.httpClient.get<Book[]>(this._url).pipe(
+      tap(books => console.log('Books List', books)),
+      map(books => books.map(book => book.id || 0)),
+      tap(ids => console.log('Books Id List', ids)),
+      map(ids => Math.max(...ids) + 1),
+      tap(id => console.log('New Books Id', id)),
+      map(id => {
+        book.id = id;
+        return book;
+      }),
+      tap(book => console.log('New Book', book)),
+      switchMap(
+        book => this.httpClient.post<Book>(this._url, book)
+      )
+    );
   }
 
   update(index: number): void {

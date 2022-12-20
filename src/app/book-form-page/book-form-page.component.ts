@@ -16,7 +16,6 @@ export class BookFormPageComponent {
     const { name, author, company} = form.value;
     // const book = new Book(form.value);
     const book = new Book(name, author, company);
-    book.id = 2;
     this.bookService.add(book).subscribe(
       () => this.router.navigate(['books'])
     );
