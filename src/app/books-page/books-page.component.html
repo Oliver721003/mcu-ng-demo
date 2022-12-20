@@ -19,7 +19,7 @@
   <tr *ngFor="let book of books; let i = index">
     <td>
       <button type="button" (click)="onEdit(i)">編輯</button>
-      <button type="button" (click)="onDelete(i)">刪除</button>
+      <button type="button" (click)="onDelete(book)">刪除</button>
     </td>
     <td>{{ book.name }}</td>
     <td>{{ book.author }}</td>

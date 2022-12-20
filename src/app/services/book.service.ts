@@ -39,7 +39,7 @@ export class BookService {
     console.log(`click edit button. index = ${index}`);
   }
 
-  delete(index: number): void {
-    this.data.splice(index, 1);
+  delete(id: number): Observable<Book> {
+    return this.httpClient.delete<Book>(`${this._url}/${id}`);
   }
 }

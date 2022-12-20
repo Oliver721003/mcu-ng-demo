@@ -2,6 +2,7 @@ import { BookService } from './../services/book.service';
 import { Component, OnInit } from '@angular/core';
 import { Book } from '../model/book';
 import { Router } from '@angular/router';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-books-page',
@@ -14,12 +15,12 @@ export class BooksPageComponent implements OnInit {
   constructor(private router: Router, protected bookService: BookService) {}
 
   ngOnInit(): void {
-      this.bookService.search()
-        .subscribe((books: Book[]) => {
-          console.table(books);
-          this.books = books;
-        })
-  }
+
+    this.bookService.search().pipe(
+      tap(books => console.table(books))
+    ).subscribe((books: Book[]) => this.books = books);
+
+    }
 
   onSearch(): void {
     this.bookService.search();
@@ -33,7 +34,10 @@ export class BooksPageComponent implements OnInit {
     this.bookService.update(index);
   }
 
-  onDelete(index: number): void {
-    this.bookService.delete(index);
+  onDelete(book: Book): void {
+    if (book.id) {
+      this.bookService.delete(book.id).subscribe(
+      );
+    }
   }
 }

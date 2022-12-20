@@ -5,12 +5,6 @@
       "name": "Book A",
       "author": "張三",
       "company": "銘傳"
-    },
-    {
-      "name": "Book B",
-      "author": "王五",
-      "company": "銘傳",
-      "id": 2
     }
   ]
 }
