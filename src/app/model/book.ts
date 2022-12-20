@@ -4,4 +4,6 @@ export class Book {
     public author: string,
     public company: string
   ) {}
+
+  id?: number;
 }

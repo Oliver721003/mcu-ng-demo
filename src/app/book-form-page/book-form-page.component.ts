@@ -16,8 +16,10 @@ export class BookFormPageComponent {
     const { name, author, company} = form.value;
     // const book = new Book(form.value);
     const book = new Book(name, author, company);
-    this.bookService.add(book);
-    this.router.navigate(['books']);
+    book.id = 2;
+    this.bookService.add(book).subscribe(
+      () => this.router.navigate(['books'])
+    );
   }
 
   onCancel(): void {
