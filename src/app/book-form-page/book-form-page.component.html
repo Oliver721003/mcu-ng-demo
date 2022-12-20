@@ -7,16 +7,16 @@
       type="text"
       placeholder="名稱"
       #name="ngModel"
-      ngModel
+      [ngModel]="book?.name"
       required>
     <span *ngIf="name.hasError('required')">請輸入書籍名稱</span>
   </div>
   <div>
-    <input name="author" type="text" placeholder="作者" #author="ngModel" ngModel required>
+    <input name="author" type="text" placeholder="作者" #author="ngModel" [ngModel]="book?.author" required>
     <span *ngIf="author.hasError('required')">請輸入書籍作者</span>
   </div>
   <div>
-    <input name="company" type="text" placeholder="出版社" #company="ngModel" ngModel required>
+    <input name="company" type="text" placeholder="出版社" #company="ngModel" [ngModel]="book?.company" required>
     <span *ngIf="company.hasError('required')">請輸入出版社</span>
   </div>
   <button type="button" [disabled]="form.invalid" (click)="onAdd(form)">新增</button>

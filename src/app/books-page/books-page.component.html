@@ -8,24 +8,26 @@
   <button type="button" (click)="onAdd()">新增</button>
 </div>
 <br>
-<table border="1" *ngIf="books.length > 0">
-  <tr>
-    <th></th>
-    <th>名稱</th>
-    <th>作者</th>
-    <th>出版社</th>
-    <th>出版日期</th>
-  </tr>
-  <tr *ngFor="let book of books; let i = index">
-    <td>
-      <button type="button" (click)="onEdit(i)">編輯</button>
-      <button type="button" (click)="onDelete(book)">刪除</button>
-    </td>
-    <td>{{ book.name }}</td>
-    <td>{{ book.author }}</td>
-    <td>{{ book.company }}</td>
-    <td>2022-10-01</td>
-  </tr>
-</table>
-<div *ngIf="books.length === 0">找不到資料</div>
-<pre>{{ books | json }}</pre>
+<div *ngIf="books$ | async as books">
+  <table border="1" *ngIf="books.length > 0">
+    <tr>
+      <th></th>
+      <th>名稱</th>
+      <th>作者</th>
+      <th>出版社</th>
+      <th>出版日期</th>
+    </tr>
+    <tr *ngFor="let book of books; let i = index">
+      <td>
+        <button type="button" (click)="onEdit(book)">編輯</button>
+        <button type="button" (click)="onDelete(book)">刪除</button>
+      </td>
+      <td>{{ book.name }}</td>
+      <td>{{ book.author }}</td>
+      <td>{{ book.company }}</td>
+      <td>2022-10-01</td>
+    </tr>
+  </table>
+  <div *ngIf="books.length === 0">找不到資料</div>
+  <pre>{{ books | json }}</pre>
+</div>

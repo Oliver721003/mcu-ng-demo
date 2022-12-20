@@ -14,7 +14,12 @@ export class BookService {
   constructor(private httpClient: HttpClient) { }
 
   search(): Observable<Book[]> {
+    console.log('search');
     return this.httpClient.get<Book[]>(this._url);
+  }
+
+  get(id: number): Observable<Book> {
+    return this.httpClient.get<Book>(`${this._url}/${id}`);
   }
 
   add(book: Book): Observable<Book> {

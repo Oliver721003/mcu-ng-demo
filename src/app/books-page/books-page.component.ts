@@ -2,7 +2,7 @@ import { BookService } from './../services/book.service';
 import { Component, OnInit } from '@angular/core';
 import { Book } from '../model/book';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs';
+import { merge, Subject, tap } from 'rxjs';
 
 @Component({
   selector: 'app-books-page',
@@ -10,17 +10,11 @@ import { tap } from 'rxjs';
   styleUrls: ['./books-page.component.css']
 })
 export class BooksPageComponent implements OnInit {
-  books: Book[] = [];
+  books$ = this.bookService.search();
 
   constructor(private router: Router, protected bookService: BookService) {}
 
-  ngOnInit(): void {
-
-    this.bookService.search().pipe(
-      tap(books => console.table(books))
-    ).subscribe((books: Book[]) => this.books = books);
-
-    }
+  ngOnInit(): void {}
 
   onSearch(): void {
     this.bookService.search();
@@ -30,13 +24,15 @@ export class BooksPageComponent implements OnInit {
     this.router.navigate(['book', 'form']);
   }
 
-  onEdit(index: number): void {
-    this.bookService.update(index);
+  onEdit(book: Book): void {
+    this.router.navigate(['book', 'edit', book.id]);
   }
 
   onDelete(book: Book): void {
     if (book.id) {
-      this.bookService.delete(book.id).subscribe(
+      this.bookService.delete(book.id).pipe(
+        tap(() => console.log(123))
+      ).subscribe(
       );
     }
   }
